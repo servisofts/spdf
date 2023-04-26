@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.IOException;
+
+import SPDF.SPDF;
+import SPDF.element.types.text;
+import SPDF.utils.JsonFileChecker;
 import Servisofts.Servisofts;
 
 public class App {
@@ -7,9 +13,12 @@ public class App {
             Servisofts.ManejadorCliente = ManejadorCliente::onMessage;
             Servisofts.Manejador = Manejador::onMessage;
             Servisofts.initialize();
-            //PDF.prueba("asd", "·FF0000");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    // public static void main(String[] args) throws Exception {
+    // String name = "darmotos_caja";
+    // new JsonFileChecker(name).start();
+    // }
 }

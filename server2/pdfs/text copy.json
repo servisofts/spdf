@@ -1,0 +1,209 @@
+{
+    "type": "page",
+    "style": {
+        "width": 612,
+        "margin": 25,
+        "height": 876,
+        "borderWidth": 1
+    },
+    "childrens": [
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "padding": 4,
+                "flexDirection": "row",
+                "borderWidth": 1
+            },
+            "childrens": [
+                {
+                    "type": "text",
+                    "childrens": "CALISTENIA BOLIVIA S.R.L.",
+                    "style": {
+                        "width": "100%",
+                        "alignItems": "center"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Gestion 2022",
+                    "style": {
+                        "width": "50%"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Hoja: 1",
+                    "style": {
+                        "width": "50%",
+                        "alignItems": "end"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "COMPROBANTE DE TRASPASO N 4-01-2022",
+                    "style": {
+                        "width": "100%",
+                        "alignItems": "center"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "(Expresado en Bs.)",
+                    "style": {
+                        "width": "100%",
+                        "alignItems": "center",
+                        "fontSize": 8
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Fecha: 2022-01-01",
+                    "style": {
+                        "width": "100%",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Concepto: REGISTRO DEL ASIENTO DE APERTURA GESTION 2022",
+                    "style": {
+                        "width": "50%",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Tipo de cambio: 6.86 $us.",
+                    "style": {
+                        "width": "50%",
+                        "alignItems": "end",
+                        "fontSize": 10
+                    }
+                }
+            ]
+        },
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "flexDirection": "row"
+            },
+            "childrens": [
+                {
+                    "type": "text",
+                    "childrens": "CUENTA",
+                    "style": {
+                        "width": "29%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10,
+                        "height": 30
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "GLOSA",
+                    "style": {
+                        "width": "29%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "DEBE",
+                    "style": {
+                        "width": "14%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "HABER",
+                    "style": {
+                        "width": "14%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "C/F",
+                    "style": {
+                        "width": "14%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10,
+                        "height": 30
+                    }
+                }
+            ]
+        },
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "flexDirection": "row"
+            },
+            "childrens": [
+                {
+                    "type": "text",
+                    "childrens": "CUENTA",
+                    "style": {
+                        "width": "29%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10,
+                        "height": 30
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "GLOSA",
+                    "style": {
+                        "width": "29%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "DEBE",
+                    "style": {
+                        "width": "14%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "HABER",
+                    "style": {
+                        "width": "14%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "C/F",
+                    "style": {
+                        "width": "14%",
+                        "borderWidth": 1,
+                        "alignItems": "center",
+                        "fontSize": 10,
+                        "height": 30
+                    }
+                }
+            ]
+        }
+    ]
+}

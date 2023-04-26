@@ -1,0 +1,155 @@
+{
+    "type": "page",
+    "style": {
+        "width": 500,
+        "height": 600,
+        "padding": 10,
+        "margin": 10,
+        "borderWidth": 1
+    },
+    "childrens": [
+        {
+            "type": "div",
+            "style": {
+                "borderWidth": 1,
+                "width": "100%",
+                "height": 100,
+                "padding": 4
+            },
+            "childrens": [
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": "100%",
+                        "height": 20,
+                        "flexDirection": "row"
+                    },
+                    "childrens": [
+                        {
+                            "type": "text",
+                            "childrens": "Hola"
+                        },
+                        {
+                            "type": "text",
+                            "childrens": "Hol2"
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1,
+                                "borderWidth":1,
+                                "height":"100%"
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "style": {
+                                "flex": 1
+                            },
+                            "childrens": "Holsasasas 3 23 2k3 2k rkfe fksfasdaskda sdk askda skd aksd aksd asdka dkas daks daks daksd aksdakdaksdas das dkaskd asd askd askd askd askd aksd aksd kasd sakd ska d"
+                        }
+                    ]
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": "100%",
+                        "height": 20
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": "100%",
+                        "height": 20
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": "100%",
+                        "flex": 1
+                    }
+                }
+            ]
+        },
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "height": 8
+            }
+        },
+        {
+            "type": "div",
+            "style": {
+                "borderWidth": 1,
+                "width": "100%",
+                "height": 20
+            }
+        },
+        {
+            "type": "div",
+            "style": {
+                "borderWidth": 1,
+                "width": "100%",
+                "height": 20
+            }
+        },
+        {
+            "type": "div",
+            "style": {
+                "borderWidth": 1,
+                "width": "100%",
+                "height": 50,
+                "padding": 4,
+                "flexDirection": "row"
+            },
+            "childrens": [
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": 100,
+                        "height": "100%"
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": 200,
+                        "height": "100%"
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "width": 100,
+                        "height": "100%"
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "borderWidth": 1,
+                        "flex": 1,
+                        "height": "100%"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "style": {
+                "width": "100%"
+            },
+            "childrens": "Holsasasas 3 23 2k3 2k rkfe fksfasdaskda sdk askda skd aksd aksd asdka dkas daks daks daksd aksdakdaksdas das dkaskd asd askd askd askd askd aksd aksd kasd sakd ska d"
+        }
+    ]
+}

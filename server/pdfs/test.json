@@ -1,0 +1,46 @@
+{
+    "type": "page",
+    "style": {
+        "width": 200,
+        "margin": 10,
+        "padding": 10,
+        "height": 300,
+        "borderWidth": 1,
+        "borderColor": "#ff0000"
+    },
+    "childrens": [
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "height": 300
+            },
+            "childrens": [
+                {
+                    "type": "div",
+                    "style": {
+                        "flex": 1,
+                        "width": "100%",
+                        "borderWidth": 1
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "flex": 1,
+                        "width": "100%",
+                        "borderWidth": 1
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "flex": 1,
+                        "width": "100%",
+                        "borderWidth": 1
+                    }
+                }
+            ]
+        }
+    ]
+}

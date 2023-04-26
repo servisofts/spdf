@@ -31,7 +31,7 @@ class index extends Component {
     Item(obj) {
         const { certificado, descripcion, estado, ip, ip_public, nombre, puerto, puerto_ws, puerto_http, puerto_arduino } = obj;
         return <SView col={"xs-12"} card style={{ padding: 8 }} onPress={() => {
-
+            SNavigation.navigate("/test");
         }}>
             <SText fontSize={18} bold>{nombre}</SText>
             <SText color={STheme.color.lightGray}>{ip}</SText>
@@ -58,7 +58,9 @@ class index extends Component {
 
     render() {
         return (
-            <SPage title={'SPDF'} >
+            <SPage title={'SPDF'} onRefresh={() => {
+                this.getData();
+            }}>
                 <SView col={"xs-12"} center>
                     <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} center>
                         {this.getLista()}

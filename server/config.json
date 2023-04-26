@@ -1,5 +1,5 @@
 {
-    "ss": "servisofts.compra_venta",
+    "ss": "servisofts.spdf",
     "socket_client": {
         "servicio": {
             "puerto": 10001,
@@ -12,24 +12,24 @@
         "reconectTime": 10000
     },
     "files": {
-        "url": "/u01/servisoftsFiles/compra_venta/"
+        "url": "/u01/servisoftsFiles/spdf/"
     },
     "data_base": {
         "puerto": 5432,
         "pass": "postgres",
-        "ip": "192.168.5.41",
-        "bd_name": "servisofts.compra_venta",
+        "ip": "192.168.5.34",
+        "bd_name": "servisofts.spdf",
         "user": "postgres"
     },
-    "nombre": "compra_venta",
+    "nombre": "spdf",
     "ssl": {
         "pass_jks": "Servisofts123.",
         "cert": {
             "ST": "Av Banzer",
             "C": "BO",
             "E": "servisofts.srl@gmail.com",
-            "OU": "compra_venta",
-            "CN": "compra_venta.servisofts.com",
+            "OU": "spdf",
+            "CN": "spdf.servisofts.com",
             "L": "Santa Cruz",
             "O": "SERVISOFTS S.R.L."
         },

@@ -1,0 +1,18 @@
+{
+    "type": "page",
+    "style": {
+        "width": 500,
+        "padding": 10,
+        "margin": 10,
+        "borderWidth": 1
+    },
+    "childrens": [
+        {
+            "type": "text",
+            "childrens": "Hola mundo 9 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. ricky",
+            "style": {
+                "width": "100%"
+            }
+        }
+    ]
+}

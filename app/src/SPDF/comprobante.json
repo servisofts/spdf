@@ -1,0 +1,85 @@
+{
+    "type": "page",
+    "style": {
+        "width": 612,
+        "height": 791,
+        "margin": 25,
+        "borderWidth": 1
+    },
+    "childrens": [
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "padding": 4,
+                "flexDirection": "row",
+                "borderWidth": 1
+            },
+            "childrens": [
+                {
+                    "type": "text",
+                    "childrens": "CALISTENIA BOLIVIA S.R.L.",
+                    "style": {
+                        "width": "100%",
+                        "alignItems": "center"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Gestion 2022",
+                    "style": {
+                        "width": "50%"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Hoja: 1",
+                    "style": {
+                        "width": "50%",
+                        "alignItems": "end"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "COMPROBANTE DE TRASPASO N 4-01-2022",
+                    "style": {
+                        "width": "100%",
+                        "alignItems": "center"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "(Expresado en Bs.)",
+                    "style": {
+                        "width": "100%",
+                        "alignItems": "center",
+                        "fontSize": 12
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Fecha: 2022-01-01",
+                    "style": {
+                        "width": "100%",
+                        "fontSize": 12
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Concepto: REGISTRO DEL ASIENTO DE APERTURA GESTION 2022",
+                    "style": {
+                        "width": "50%"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "Tipo de cambio: 6.86 $us.",
+                    "style": {
+                        "width": "50%",
+                        "alignItems": "end"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,18 +1,55 @@
-## Getting Started
+# Servisofts PDF
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+Para crear un pdf es necesario construir un JSON con el contenido.
 
-The workspace contains two folders by default, where:
+## Elemento
+| Atributo  | Tipo    | Valor Predeterminado |
+| --------- | ------- | -------------------- |
+| type      | String  |                      |
+| debug     | Boolean |                      |
+| style     | {}      |                      |
+| childrens | []      |                      |
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Style
+| Atributo       | Tipo   | Valor Predeterminado |
+| -------------- | ------ | -------------------- |
+| width          | float  | 0                    |
+| height         | float  | 0                    |
+| margin         | float  | 0                    |
+| marginTop      | float  | 0                    |
+| marginBottom   | float  | 0                    |
+| marginLeft     | float  | 0                    |
+| marginRight    | float  | 0                    |
+| padding        | float  | 0                    |
+| paddingTop     | float  | 0                    |
+| paddingBottom  | float  | 0                    |
+| paddingLeft    | float  | 0                    |
+| paddingRight   | float  | 0                    |
+| borderWidth    | float  | 0                    |
+| borderRadius   | float  | 0                    |
+| borderColor    | String | "#000000"            |
+| flex           | float  | 0                    |
+| fontSize       | float  | 12                   |
+| alignItems     | String | "start"              |
+| flexDirection  | String | "column" "row"       |
+| justifyContent | String | "start"              |
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
-## Dependency Management Una letra
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+### pages
+
+Para crear un nuevo documento iniciamos creando objeto JSON con el primer elemento de tipo "page".
+```json
+    {
+        "type": "page",
+        "style":{
+            "width": 300,
+        },
+        "childrens":[
+            ...
+        ]
+    }
+```

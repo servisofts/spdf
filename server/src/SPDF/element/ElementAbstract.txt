@@ -1,0 +1,181 @@
+package SPDF.element;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.awt.Color;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import SPDF.element.ElementFactory.ElementType;
+import SPDF.element.style.ElementStyle;
+import SPDF.element.style.PaintProps;
+import SPDF.element.style.PaintUtils;
+
+public abstract class ElementAbstract implements ElementInterface {
+
+    public ElementStyle style;
+    protected JSONObject props;
+    protected ElementAbstract parent;
+    protected ElementAbstract header;
+    protected ElementAbstract footer;
+    protected ElementType type;
+    public ArrayList<ElementAbstract> childrens;
+    public boolean painted;
+
+    public ElementAbstract(JSONObject props, ElementAbstract parent, ElementType type) throws ElementException {
+        this.props = props;
+        this.parent = parent;
+        this.type = type;
+        this.childrens = new ArrayList<>();
+        this.validations();
+        this.style = new ElementStyle(this);
+        this.style.beforeLoadChildrens();
+        this.instanceChildrens();
+        this.style.afterLoadChildrens();
+
+        // this.onChildrensReady();
+        System.out.println(type.name());
+        System.out.println(this.style.toString());
+        System.out.println("");
+
+    }
+
+    public void instanceChildrens() throws ElementException {
+        if (!this.props.has("childrens") || this.props.isNull("childrens")) {
+            return;
+        }
+        this.childrens = new ArrayList<>();
+        JSONArray childs = this.props.getJSONArray("childrens");
+        for (int i = 0; i < childs.length(); i++) {
+            JSONObject obj = childs.getJSONObject(i);
+            ElementAbstract item = (ElementAbstract) ElementFactory.create(obj, this);
+            childrens.add(item);
+        }
+    }
+
+    PaintProps ppinitial;
+
+    @Override
+    public boolean paint(PaintProps props) throws IOException, ElementException {
+        if (painted == true)
+            return false;
+
+        PaintProps temp = props.clone();
+        if (this.parent != null) {
+            // if (childrens.size() <= 0) {
+            // if()
+            // if (parent.ppinitial.current_y - parent.style.getContentHeight() >
+            // temp.current_y - this.style.height) {
+            // return false;
+            // }
+            // }
+            if (this.parent.style.alignItems.equals("center")) {
+                if (this.parent.style.flexDirection.equals("row")) {
+                    float space = (this.parent.style.getContentWidth() - this.parent.style.getChildrensWidth()) / 2;
+                    temp.current_x += space;
+                } else {
+                    float space = (this.parent.style.getContentWidth() - this.style.width) / 2;
+                    temp.current_x += space;
+
+                }
+            }
+            if (this.parent.style.justifyContent.equals("center")) {
+                if (this.parent.style.flexDirection.equals("row")) {
+                    float space = (this.parent.style.getContentHeight() - this.style.height) / 2;
+                    temp.current_y -= space;
+                } else {
+                    float space = (this.parent.style.getContentHeight() - this.parent.style.getChildrensHeight()) / 2;
+                    temp.current_y -= space;
+                }
+            }
+
+        }
+
+        paintBorder(temp);
+        paintLogBox(temp);
+        temp.current_x += this.style.marginLeft + this.style.paddingLeft;
+        temp.current_y -= (this.style.marginBottom + this.style.paddingBottom);
+        // temp.ch =
+        ppinitial = temp.clone();
+        if (this.header != null) {
+            this.header.paint(temp);
+            System.out.println("Pinto header" + temp.current_y);
+        }
+        for (ElementAbstract elementAbstract : childrens) {
+            elementAbstract.paint(temp);
+        }
+        if (this.footer != null) {
+            this.footer.paint(temp);
+        }
+        if (this.parent == null) {
+            return true;
+        }
+        if (this.parent.style.flexDirection.equals("row")) {
+            props.current_x += this.style.width;
+        } else {
+            props.current_y -= this.style.height;
+        }
+        painted = true;
+        return true;
+    }
+
+    public void paintBorder(PaintProps props) throws IOException, ElementException {
+        if (this.style.borderWidth > 0) {
+            props.stream.setStrokingColor(Color.decode(this.style.borderColor));
+            props.stream.setLineWidth(this.style.borderWidth);
+            PaintUtils.drawRoundedRectangle(props.stream, props.current_x + this.style.marginLeft,
+                    props.current_y - (this.style.height - (this.style.marginBottom)),
+                    this.style.width - (this.style.marginRight + style.marginLeft),
+                    this.style.height - (style.marginTop + style.marginBottom), this.style.borderRadius);
+            props.stream.stroke();
+        }
+    }
+
+    public void paintLogBox(PaintProps props) throws IOException, ElementException {
+        if (!this.props.has("debug") || this.props.isNull("debug")) {
+            return;
+        }
+        props.stream.beginText();
+        props.stream.setFont(new PDType1Font(FontName.TIMES_ROMAN), 10);
+        props.stream.newLineAtOffset(props.current_x + this.style.marginLeft,
+                props.current_y - 8);
+        String log = "";
+        log += this.type.name();
+        log += " w: " + this.style.width;
+        log += " h: " + this.style.height;
+        log += " cx: " + props.current_x;
+        log += " cy: " + props.current_y;
+        props.stream.showText(log);
+        props.stream.endText();
+    }
+
+    public JSONObject getProps() {
+        return this.props;
+    }
+
+    public void setProps(JSONObject props) {
+        this.props = props;
+    }
+
+    public ElementAbstract getParent() {
+        return this.parent;
+    }
+
+    public void setParent(ElementAbstract parent) {
+        this.parent = parent;
+    }
+
+    public ElementType getType() {
+        return this.type;
+    }
+
+    public void setType(ElementType type) {
+        this.type = type;
+    }
+
+}
