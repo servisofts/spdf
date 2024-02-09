@@ -1,0 +1,267 @@
+{
+    "type": "page",
+    "style": {
+        "width": 612,
+        "height": 791,
+        "margin": 50,
+        "padding": 12
+    },
+    "header": {
+        "type": "div",
+        "style": {
+            "width": "100%"
+        },
+        "childrens": [
+            {
+                "type": "text",
+                "childrens": "CONDOMINIO SANTA MARIA",
+                "style": {
+                    "width": 90,
+                    "fontSize": 12,
+                    "font": "Times New Roman"
+                }
+            },
+            {
+                "type": "div",
+                "style": {
+                    "width": "100%",
+                    "alignItems": "center"
+                },
+                "childrens": [
+                    {
+                        "type": "text",
+                        "childrens": "INFORME ECONOMICO",
+                        "style": {
+                            "fontSize": 16,
+                            "font": "Times New Roman",
+                            "fontWeight": "bold"
+                        }
+                    },
+                    {
+                        "type": "div",
+                        "style": {
+                            "width": "100%",
+                            "height": 4
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "childrens": "Desde el 1 de abril del 2023, hasta el 30 de abril de 2023.",
+                        "style": {
+                            "fontSize": 12,
+                            "font": "Times New Roman"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "childrens": [
+        {
+            "type": "div",
+            "style": {
+                "width": "100%"
+            },
+            "childrens": [
+                {
+                    "type": "text",
+                    "childrens": "INGRESOS",
+                    "style": {
+                        "fontSize": 12,
+                        "font": "Times New Roman",
+                        "fontWeight": "bold"
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "width": "100%",
+                        "height": 4
+                    }
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "width": "100%",
+                        "flexDirection": "row",
+                        "height": 16
+                    },
+                    "childrens": [
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 3
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "Saldo del mes anterior",
+                                    "style": {
+                                        "fontSize": 12,
+                                        "font": "Times New Roman"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1,
+                                "alignItems": "end"
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "16.708,21",
+                                    "style": {
+                                        "fontSize": 12,
+                                        "font": "Times New Roman",
+                                        "fontWeight": "bold"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "width": "100%",
+                        "flexDirection": "row",
+                        "height": 16
+                    },
+                    "childrens": [
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 3
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "Saldo en efectivo",
+                                    "style": {
+                                        "fontSize": 12,
+                                        "font": "Times New Roman"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1,
+                                "alignItems": "end"
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "0,00",
+                                    "style": {
+                                        "fontSize": 12,
+                                        "font": "Times New Roman"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "width": "100%",
+                        "flexDirection": "row",
+                        "height": 2
+                    },
+                    "childrens": [
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 3
+                            },
+                            "childrens": []
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1,
+                                "height": 2,
+                                "backgroundColor": "#000000"
+                            },
+                            "childrens": []
+                        }
+                    ]
+                },
+                {
+                    "type": "div",
+                    "style": {
+                        "width": "100%",
+                        "flexDirection": "row",
+                        "height": 16
+                    },
+                    "childrens": [
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 3,
+                                "alignItems":"center"
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "Total ingresos",
+                                    "style": {
+                                        "fontSize": 12,
+                                        "fontWeight":"bold",
+                                        "font": "Times New Roman"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1,
+                                "alignItems": "end"
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "0,00",
+                                    "style": {
+                                        "fontSize": 12,
+                                        "fontWeight":"bold",
+                                        "font": "Times New Roman"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "footer": {
+        "type": "div",
+        "style": {
+            "width": "100%",
+            "height": 30,
+            "justifyContent": "center",
+            "alignItems": "center"
+        },
+        "childrens": [
+            {
+                "type": "div",
+                "style": {
+                    "width": "100%",
+                    "height": 1,
+                    "backgroundColor": "#666666"
+                }
+            },
+            {
+                "type": "text",
+                "childrens": "Page ${current_page}"
+            }
+        ]
+    }
+}

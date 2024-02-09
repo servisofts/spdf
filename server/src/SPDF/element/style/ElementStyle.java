@@ -22,13 +22,14 @@ public class ElementStyle {
     // Border
     public float borderWidth = 0, borderRadius = 0;
     public String borderColor = "#000000";
+    public String fontWeight = "regular";
 
     // Other
     public float flex = 0;
 
     // Text
     public float fontSize = 12;
-    public String color = "#000000";
+    public String color = "#000000", font = "Times New Roman";
     // direction
     public String alignItems = "start", flexDirection = "column", justifyContent = "start";
 
@@ -132,6 +133,10 @@ public class ElementStyle {
             this.fontSize = this.jsonStyle.getInt("fontSize");
         if (validateProp("color"))
             this.color = this.jsonStyle.getString("color");
+        if (validateProp("font"))
+            this.font = this.jsonStyle.getString("font");
+        if (validateProp("fontWeight"))
+            this.fontWeight = this.jsonStyle.getString("fontWeight");
 
         if (validateProp("alignItems"))
             this.alignItems = this.jsonStyle.getString("alignItems");
@@ -149,8 +154,14 @@ public class ElementStyle {
             props.get(i).afterLoadChildrens();
         }
         if (!validateProp("height") && height <= 0) {
-            this.height = this.getChildrensHeight() + (paddingTop + paddingBottom + marginTop + marginBottom)
-                    + this.getHeaderHeight() + this.getFooterHeight();
+            if (this.flexDirection.equals("row")) {
+                this.height = this.getMaxChildrensHeight() + (paddingTop + paddingBottom + marginTop + marginBottom)
+                        + this.getHeaderHeight() + this.getFooterHeight();
+            } else {
+                this.height = this.getChildrensHeight() + (paddingTop + paddingBottom + marginTop + marginBottom)
+                        + this.getHeaderHeight() + this.getFooterHeight();
+            }
+
         }
         int flext = 0;
         float widtht = 0;
@@ -206,6 +217,17 @@ public class ElementStyle {
         float h = 0;
         for (ElementAbstract elementAbstract : this.element.childrens) {
             h += elementAbstract.style.height;
+        }
+        return h;
+    }
+
+    public float getMaxChildrensHeight() {
+        float h = 0;
+        for (ElementAbstract elementAbstract : this.element.childrens) {
+            if (h <= elementAbstract.style.height) {
+                h = elementAbstract.style.height;
+
+            }
         }
         return h;
     }

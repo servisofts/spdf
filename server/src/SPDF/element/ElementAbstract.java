@@ -142,10 +142,12 @@ public abstract class ElementAbstract implements ElementInterface {
         }
 
         if (this.parent == null) {
+            this.painted = true;
             return true;
         }
         if (this.parent.style.flexDirection.equals("row")) {
             props.current_x += this.style.width;
+            props.current_y -= this.style.height;
         } else {
             props.current_y -= this.style.height;
         }
