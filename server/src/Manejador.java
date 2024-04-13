@@ -14,8 +14,8 @@ public class Manejador {
             return;
         }
         switch (obj.getString("component")) {
-            case pdf.COMPONENT:
-                pdf.onMessage(obj, session);
+            case PDF.COMPONENT:
+                PDF.onMessage(obj, session);
                 break;
         }
     }

@@ -1,0 +1,239 @@
+{
+    "type": "page",
+    "style": {
+        "width": 612,
+        "height": 791,
+        "margin": 50,
+        "padding": 12
+    },
+    "header": {
+        "type": "div",
+        "style": {
+            "width": "100%"
+        },
+        "childrens": [
+            {
+                "type": "div",
+                "style": {
+                    "width": "100%",
+                    "flexDirection": "row",
+                    "height": 90
+                },
+                "childrens": [
+                    {
+                        "type": "div",
+                        "style": {
+                            "flex": 1
+                        },
+                        "childrens": [
+                            {
+                                "type": "text",
+                                "childrens": "Factura",
+                                "style": {
+                                    "fontSize": 20
+                                }
+                            },
+                            {
+                                "type": "div",
+                                "style": {
+                                    "width": "100%",
+                                    "height": 8
+                                }
+                            },
+                            {
+                                "type": "div",
+                                "style": {
+                                    "width": "100%"
+                                },
+                                "childrens": [
+                                    {
+                                        "type": "text",
+                                        "childrens": "2023, Abril 21, 17:41",
+                                        "style": {
+                                            "fontSize": 12
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "childrens": "2023, Abril 21, 17:45",
+                                        "style": {
+                                            "fontSize": 12,
+                                            "color": "#A21717"
+                                        }
+                                    },
+                                    {
+                                        "type": "div",
+                                        "style": {
+                                            "width": "100%",
+                                            "height": 4
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "childrens": "Sucursal / Cajero",
+                                        "style": {
+                                            "fontSize": 10,
+                                            "color": "#666666"
+                                        }
+                                    },
+                                    {
+                                        "type": "div",
+                                        "style": {
+                                            "height": 4
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "childrens": "Remanso",
+                                        "style": {
+                                            "fontSize": 12
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "childrens": "Nombre del cajero",
+                                        "style": {
+                                            "fontSize": 12,
+                                            "color": "#666666"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "div",
+                "style": {
+                    "height": 8
+                }
+            },
+            {
+                "type": "div",
+                "style": {
+                    "width": "100%",
+                    "alignItems": "center",
+                    "paddingBottom": 4
+                },
+                "childrens": [
+                    {
+                        "type": "text",
+                        "childrens": "Detalle",
+                        "style": {
+                            "fontSize": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "div",
+                "style": {
+                    "width": "100%",
+                    "height": 1,
+                    "backgroundColor": "#666666"
+                }
+            }
+        ]
+    },
+    "childrens": [
+        {
+            "type": "div",
+            "style": {
+                "width": "100%",
+                "paddingTop": 16,
+                "paddingBottom": 16
+            },
+            "childrens": [
+                {
+                    "type": "div",
+                    "style": {
+                        "width": "100%",
+                        "flexDirection": "row",
+                        "height": 14
+                    },
+                    "childrens": [
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 4
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "19:29",
+                                    "style": {
+                                        "color": "#666666"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "Transferencia"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "div",
+                            "style": {
+                                "flex": 1,
+                                "alignItems": "end"
+                            },
+                            "childrens": [
+                                {
+                                    "type": "text",
+                                    "childrens": "199.00"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "childrens": "Traspaso a bancos",
+                    "style": {
+                        "color": "#000000"
+                    }
+                },
+                {
+                    "type": "text",
+                    "childrens": "MARIA FERNANDA ROCA MERLGAR",
+                    "style": {
+                        "font": "Roboto",
+                        "color": "#666666"
+                    }
+                }
+            ]
+        }
+    ],
+    "footer": {
+        "type": "div",
+        "style": {
+            "width": "100%",
+            "height": 30,
+            "justifyContent": "center",
+            "alignItems": "center"
+        },
+        "childrens": [
+            {
+                "type": "div",
+                "style": {
+                    "width": "100%",
+                    "height": 1,
+                    "backgroundColor": "#666666"
+                }
+            },
+            {
+                "type": "text",
+                "childrens": "Page ${current_page}"
+            }
+        ]
+    }
+}

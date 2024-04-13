@@ -8,7 +8,7 @@ import SPDF.SPDF;
 import Server.SSSAbstract.SSSessionAbstract;
 import Servisofts.SConfig;
 
-public class pdf {
+public class PDF {
     public static final String COMPONENT = "pdf";
 
     public static void onMessage(JSONObject obj, SSSessionAbstract session) {

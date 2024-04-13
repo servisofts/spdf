@@ -81,8 +81,9 @@ public class text extends ElementAbstract {
             }
 
             System.out.println("w: " + descriptor.getFontWeight() + "    " + this.text_value);
-            this.font_h = (font.getFontDescriptor().getCapHeight()) / 1000
-                    * (float) (this.style.fontSize * 0.8 * (1000 / descriptor.getFontWeight()));
+            // this.font_h = (font.getFontDescriptor().getCapHeight()) / 1000
+            // * (float) (this.style.fontSize * 0.8 * (1000 / descriptor.getFontWeight()));
+            this.font_h = font.getHeight((int) this.style.fontSize)+8;
             this.text_w = (((font.getStringWidth(this.text_value)) / 1000)
                     + ((1000 - this.font.getSpaceWidth()) / 1000))
                     * (float) (this.style.fontSize * correccion);
@@ -93,8 +94,53 @@ public class text extends ElementAbstract {
         }
     }
 
-    public String[] getLines(String txt, float width) {
-        return txt.split("(?<=\\G.{" + (int) (width / this.font_w) + "})");
+    // public String[] getLines(String txt, float width) {
+    // return txt.split("(?<=\\G.{" + (int) (width / this.font_w) + "})");
+    // }
+    public String[] getLines(String txt, float width) throws IOException {
+        List<String> lines = new ArrayList<>();
+        String[] words = txt.split("\\s+"); // Divide el texto en palabras
+        StringBuilder line = new StringBuilder();
+        float lineWidth = 0;
+
+        for (String word : words) {
+            if (word.startsWith("1516A")) {
+                System.out.println("asdasd");
+            }
+            float wordWidth = this.font.getStringWidth(word) / 1000 * this.style.fontSize;
+
+            if (wordWidth > width) {
+                String[] arr = word.split("(?<=\\G.{" + (int) (width / (wordWidth / (word.length() - 1))) + "})");
+                line = new StringBuilder();
+                lineWidth = 0;
+                for (int i = 0; i < arr.length; i++) {
+                    lines.add(arr[i].toString().trim());
+                }
+                break;
+            }
+            // Verifica si agregar la palabra actual excede el ancho de la línea
+            if (lineWidth + wordWidth > width) {
+                // Si la línea no está vacía, agrega la línea actual a la lista y comienza una
+                // nueva
+
+                if (line.length() > 0) {
+                    lines.add(line.toString().trim());
+                    line = new StringBuilder();
+                    lineWidth = 0;
+                }
+            }
+
+            // Agrega la palabra a la línea y actualiza el ancho de la línea
+            line.append(word).append(" ");
+            lineWidth += wordWidth;
+        }
+
+        // Agrega la última línea si no está vacía
+        if (line.length() > 0) {
+            lines.add(line.toString().trim());
+        }
+
+        return lines.toArray(new String[0]);
     }
 
     @Override
@@ -110,7 +156,12 @@ public class text extends ElementAbstract {
         this.instaceFont();
         // if()
         if (this.style.width > 0) {
-            this.lines = this.getLines(this.text_value, this.style.getContentWidth());
+            try {
+                this.lines = this.getLines(this.text_value, this.style.getContentWidth());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } else {
             this.lines = new String[] { this.text_value };
             this.style.width = this.text_w;
@@ -136,7 +187,11 @@ public class text extends ElementAbstract {
         while (matcher.find()) {
             valNames.add(matcher.group(1));
             if (matcher.group(1).equals("current_page")) {
-                text2 = this.text_value.replaceAll("\\$\\{current_page\\}", props.current_page + "");
+                text2 = text2.replaceAll("\\$\\{current_page\\}", props.current_page + "");
+                hay_cambios = true;
+            }
+            if (matcher.group(1).equals("cant_page")) {
+                text2 = text2.replaceAll("\\$\\{cant_page\\}", props.cant_page + "");
                 hay_cambios = true;
             }
         }
