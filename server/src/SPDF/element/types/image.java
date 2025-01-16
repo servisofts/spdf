@@ -1,10 +1,13 @@
 package SPDF.element.types;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
@@ -40,9 +43,38 @@ public class image extends ElementAbstract {
     @Override
     public boolean paint(PaintProps props) throws IOException, ElementException {
 
-        PDRectangle mediaBox = props.page.getMediaBox();
-        URL url = new URL(this.src);
-        BufferedImage image = ImageIO.read(url);
+        String imageData = this.src;
+        if (imageData == null || imageData.isEmpty()) {
+            return false;
+        }
+
+        byte[] imageBytes;
+        if (imageData.startsWith("data:image")) {
+            // Es un base64
+            String base64Data = imageData.substring(imageData.indexOf(",") + 1);
+            imageBytes = Base64.getDecoder().decode(base64Data);
+        } else {
+            // Asumimos que es una URL
+            try {
+                URL url = new URL(imageData);
+                InputStream is = url.openStream();
+                imageBytes = is.readAllBytes();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
+        BufferedImage image;
+        try {
+            image = ImageIO.read(bais);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);
         PDImageXObject pdImage = PDImageXObject.createFromByteArray(props.document, baos.toByteArray(), "image");
