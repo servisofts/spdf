@@ -12,7 +12,7 @@
         "reconectTime": 10000
     },
     "files": {
-        "url": "/u01/servisoftsFiles/spdf/"
+        "url": "u01/servisoftsFiles/spdf/"
     },
     "data_base": {
         "puerto": 5432,
