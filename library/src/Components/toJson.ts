@@ -17,8 +17,8 @@ const loadChildrens = (a) => {
                     let sf = toJson(a);
                     if (sf) {
                         if (Array.isArray(sf)) {
-                            sf.map(c=>{
-                                childrens.push(c)    
+                            sf.map(c => {
+                                childrens.push(c)
                             })
                         } else {
                             childrens.push(sf)
@@ -40,12 +40,19 @@ const loadChildrens = (a) => {
     }
 }
 const toJson = (a) => {
+    console.log("entro_toJson")
     if (!a) return null;
     let JSON_COMPONENT = null
     if (a.type) {
         JSON_COMPONENT = instaceType(a);
         if (JSON_COMPONENT) {
-            if(!JSON_COMPONENT.childrens){
+            if (JSON_COMPONENT.footer) {
+                JSON_COMPONENT.footer = toJson(JSON_COMPONENT.footer)
+            }
+            if (JSON_COMPONENT.header) {
+                JSON_COMPONENT.header = toJson(JSON_COMPONENT.header)
+            }
+            if (!JSON_COMPONENT.childrens) {
                 JSON_COMPONENT.childrens = loadChildrens(a)
             }
         }
@@ -55,7 +62,7 @@ const toJson = (a) => {
             a.map(b => {
                 let JSON_TEMP = instaceType(b);
                 if (JSON_TEMP) {
-                    if(!JSON_TEMP.childrens){
+                    if (!JSON_TEMP.childrens) {
                         JSON_TEMP.childrens = loadChildrens(b)
                     }
                 }

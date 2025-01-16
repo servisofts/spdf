@@ -13,6 +13,12 @@ export default (props: PagePropsType) => {
     let data: any = {
         "type": "page",
     }
+    if(props.footer){
+        data.footer = props.footer
+    }
+    if(props.header){
+        data.header = props.header
+    }
     if (props.style) {
         data.style = props.style;
     }
