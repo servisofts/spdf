@@ -79,6 +79,10 @@ public class image extends ElementAbstract {
         ImageIO.write(image, "png", baos);
         PDImageXObject pdImage = PDImageXObject.createFromByteArray(props.document, baos.toByteArray(), "image");
 
+        if (this.parent != null) {
+            this.alignItems(props);
+            this.justifyContent(props);
+        }
         // float imageWidth = pdImage.getWidth();
         // float imageHeight = pdImage.getHeight();
         // float scale = 1.0f; // Change scale as needed

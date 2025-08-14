@@ -20,7 +20,9 @@ public class ElementStyle {
     // Padding
     public float padding = 0, paddingTop = 0, paddingBottom = 0, paddingLeft = 0, paddingRight = 0;
     // Border
-    public float borderWidth = 0, borderRadius = 0;
+    public float borderWidth = 0, borderRadius = 0, borderTopWidth = 0, borderBottomWidth = 0,
+            borderLeftWidth = 0, borderRightWidth = 0;
+
     public String borderColor = "#000000";
     public String fontWeight = "regular";
 
@@ -30,9 +32,12 @@ public class ElementStyle {
     // Text
     public float fontSize = 12;
     public String color = "#000000", font = "Times New Roman";
+    public String textAlign = "left";
     // direction
     public String alignItems = "start", flexDirection = "column", justifyContent = "start";
 
+    public String position = "relative";
+    public int left = 0, top = 0, right = 0, bottom = 0;
     private ArrayList<StylePropAbstract> props;
 
     public ElementStyle(ElementAbstract element) {
@@ -118,6 +123,16 @@ public class ElementStyle {
 
         if (validateProp("borderWidth"))
             this.borderWidth = this.jsonStyle.getInt("borderWidth");
+
+        if (validateProp("borderTopWidth"))
+            this.borderTopWidth = this.jsonStyle.getInt("borderTopWidth");
+        if (validateProp("borderBottomWidth"))
+            this.borderBottomWidth = this.jsonStyle.getInt("borderBottomWidth");
+        if (validateProp("borderLeftWidth"))
+            this.borderLeftWidth = this.jsonStyle.getInt("borderLeftWidth");
+        if (validateProp("borderRightWidth"))
+            this.borderRightWidth = this.jsonStyle.getInt("borderRightWidth");
+
         if (validateProp("borderRadius"))
             this.borderRadius = this.jsonStyle.getInt("borderRadius");
         if (validateProp("borderColor"))
@@ -131,6 +146,8 @@ public class ElementStyle {
 
         if (validateProp("fontSize"))
             this.fontSize = this.jsonStyle.getInt("fontSize");
+        if (validateProp("textAlign"))
+            this.textAlign = this.jsonStyle.getString("textAlign");
         if (validateProp("color"))
             this.color = this.jsonStyle.getString("color");
         if (validateProp("font"))
@@ -144,6 +161,19 @@ public class ElementStyle {
             this.justifyContent = this.jsonStyle.getString("justifyContent");
         if (validateProp("flexDirection"))
             this.flexDirection = this.jsonStyle.getString("flexDirection");
+        if (validateProp("position"))
+            this.position = this.jsonStyle.getString("position");
+
+        if (validateProp("left"))
+            this.left = this.jsonStyle.getInt("left");
+        if (validateProp("top"))
+            this.top = this.jsonStyle.getInt("top");
+        if (validateProp("right"))
+            this.right = this.jsonStyle.getInt("right");
+        if (validateProp("bottom"))
+            this.bottom = this.jsonStyle.getInt("bottom");
+        if (validateProp("backgroundColor"))
+            this.jsonStyle.put("backgroundColor", this.jsonStyle.getString("backgroundColor").replaceAll("#", ""));
     }
 
     // ********* Despues de crear los hijos *********
@@ -216,6 +246,9 @@ public class ElementStyle {
     public float getChildrensHeight() {
         float h = 0;
         for (ElementAbstract elementAbstract : this.element.childrens) {
+            if(elementAbstract.style.position.equals("absolute")){
+                continue;
+            }
             h += elementAbstract.style.height;
         }
         return h;

@@ -58,6 +58,7 @@ public class page extends ElementAbstract {
             props.document.addPage(pagepdf);
             System.out.println("Nueva pagina agregada");
         }
+        props.cant_page = props.current_page;
         System.out.println("Terminado");
         // for (int i = 0; i < props.cant_page; i++) {
 

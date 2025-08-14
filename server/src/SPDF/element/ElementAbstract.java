@@ -82,17 +82,20 @@ public abstract class ElementAbstract implements ElementInterface {
             return true;
         }
 
+        // return true;
+
         this.px = props.current_x;
         this.py = props.current_y;
         this.cx = props.current_x + (this.style.marginLeft + this.style.paddingLeft);
         this.cy = props.current_y - (this.style.marginTop + this.style.paddingTop);
-
-        if (props.max_y > this.py - this.style.height) {
-            if (this.style.height > this.parent.style.getContentHeight()) {
-                System.out.println("No se puede pintar demaciado grande");
-                // return true;
-            } else {
-                return false;
+        if (!style.position.equals("absolute")) {
+            if (props.max_y > this.py - this.style.height) {
+                if (this.style.height > this.parent.style.getContentHeight()) {
+                    System.out.println("No se puede pintar demaciado grande");
+                    // return true;
+                } else {
+                    return false;
+                }
             }
         }
         if (this.parent != null) {
@@ -130,15 +133,38 @@ public abstract class ElementAbstract implements ElementInterface {
         }
 
         for (ElementAbstract elementAbstract : childrens) {
-            if (elementAbstract.parent.style.flexDirection.equals("row")) {
-                propsChildrens.current_y = this.cy;
+            if (elementAbstract.style.position.equals("absolute")) {
+                // elementAbstract.painted = false;
+                PaintProps propsChildrensAbsolute = props.clone();
+
+                // propsChildrensAbsolute.current_x += elementAbstract.style.left;
+                if (elementAbstract.style.right > 0) {
+                    propsChildrensAbsolute.current_x = (props.current_x + this.style.getContentWidth()) -elementAbstract.style.width - elementAbstract.style.right;
+                } else if (elementAbstract.style.left > 0) {
+                    propsChildrensAbsolute.current_x = props.current_x + elementAbstract.style.left;
+                }
+
+                // propsChildrensAbsolute.current_y += elementAbstract.style.top;
+                if (elementAbstract.style.bottom > 0) {
+                    propsChildrensAbsolute.current_y = props.current_y - this.style.height + elementAbstract.style.bottom;
+                } else if (elementAbstract.style.top > 0) {
+                    propsChildrensAbsolute.current_y = props.current_y - elementAbstract.style.top;
+                }
+
+                elementAbstract.paint(propsChildrensAbsolute);
+                continue;
             } else {
-                propsChildrens.current_x = this.cx;
+                if (elementAbstract.parent.style.flexDirection.equals("row")) {
+                    propsChildrens.current_y = this.cy;
+                } else {
+                    propsChildrens.current_x = this.cx;
+                }
+                if (!elementAbstract.paint(propsChildrens)) {
+                    return false;
+                }
+
             }
 
-            if (!elementAbstract.paint(propsChildrens)) {
-                return false;
-            }
         }
 
         if (this.parent == null) {
@@ -201,15 +227,75 @@ public abstract class ElementAbstract implements ElementInterface {
         }
     }
 
-    public void paintBorder(PaintProps props) throws IOException, ElementException {
+    public void paintBorderWith(PaintProps props) throws IOException,
+            ElementException {
         if (this.style.borderWidth > 0) {
             props.stream.setStrokingColor(Color.decode(this.style.borderColor));
             props.stream.setLineWidth(this.style.borderWidth);
-            PaintUtils.drawRoundedRectangle(props.stream, props.current_x + this.style.marginLeft,
+            PaintUtils.drawRoundedRectangle(props.stream, props.current_x +
+                    this.style.marginLeft,
                     props.current_y - (this.style.height - (this.style.marginBottom)),
                     this.style.width - (this.style.marginRight + style.marginLeft),
-                    this.style.height - (style.marginTop + style.marginBottom), this.style.borderRadius);
+                    this.style.height - (style.marginTop + style.marginBottom),
+                    this.style.borderRadius);
             props.stream.stroke();
+        }
+    }
+
+    public void paintBorder(PaintProps props) throws IOException, ElementException {
+        if (style.borderWidth > 0) {
+            paintBorderWith(props);
+            return;
+        }
+        PDPageContentStream stream = props.stream;
+        float x = props.current_x + style.marginLeft;
+        float y = props.current_y - (style.height - style.marginBottom);
+        float width = style.width - (style.marginLeft + style.marginRight);
+        float height = style.height - (style.marginTop + style.marginBottom);
+        float r = Math.min(style.borderRadius, Math.min(width, height) / 2);
+
+        // Top border
+        if (style.borderTopWidth > 0) {
+            stream.setLineWidth(style.borderTopWidth);
+            stream.setStrokingColor(Color.decode(style.borderColor));
+            stream.moveTo(x + r, y + height);
+            stream.lineTo(x + width - r, y + height);
+            if (r > 0)
+                stream.curveTo(x + width, y + height, x + width, y + height, x + width, y + height - r);
+            stream.stroke();
+        }
+
+        // Right border
+        if (style.borderRightWidth > 0) {
+            stream.setLineWidth(style.borderRightWidth);
+            stream.setStrokingColor(Color.decode(style.borderColor));
+            stream.moveTo(x + width, y + height - r);
+            stream.lineTo(x + width, y + r);
+            if (r > 0)
+                stream.curveTo(x + width, y, x + width, y, x + width - r, y);
+            stream.stroke();
+        }
+
+        // Bottom border
+        if (style.borderBottomWidth > 0) {
+            stream.setLineWidth(style.borderBottomWidth);
+            stream.setStrokingColor(Color.decode(style.borderColor));
+            stream.moveTo(x + width - r, y);
+            stream.lineTo(x + r, y);
+            if (r > 0)
+                stream.curveTo(x, y, x, y, x, y + r);
+            stream.stroke();
+        }
+
+        // Left border
+        if (style.borderLeftWidth > 0) {
+            stream.setLineWidth(style.borderLeftWidth);
+            stream.setStrokingColor(Color.decode(style.borderColor));
+            stream.moveTo(x, y + r);
+            stream.lineTo(x, y + height - r);
+            if (r > 0)
+                stream.curveTo(x, y + height, x, y + height, x + r, y + height);
+            stream.stroke();
         }
     }
 

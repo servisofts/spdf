@@ -39,7 +39,7 @@ public class text extends ElementAbstract {
     public String text_value;
     String[] lines;
     public PDType0Font font;
-    float font_h, font_w, text_w;
+    float font_h, font_w, text_w, interlineado = 4;
 
     public text(JSONObject props, ElementAbstract parent, SPDF pdf) throws ElementException {
         super(props, parent, ElementType.text, pdf);
@@ -81,13 +81,18 @@ public class text extends ElementAbstract {
             }
 
             System.out.println("w: " + descriptor.getFontWeight() + "    " + this.text_value);
-            // this.font_h = (font.getFontDescriptor().getCapHeight()) / 1000
-            // * (float) (this.style.fontSize * 0.8 * (1000 / descriptor.getFontWeight()));
-            this.font_h = font.getHeight((int) this.style.fontSize)+8;
-            this.text_w = (((font.getStringWidth(this.text_value)) / 1000)
-                    + ((1000 - this.font.getSpaceWidth()) / 1000))
-                    * (float) (this.style.fontSize * correccion);
+
+            float ascent = descriptor.getAscent();
+            float descent = descriptor.getDescent();
+            // this.font_h = font.getHeight((int) this.style.fontSize);
+            this.font_h = (ascent - descent) / 1000f * this.style.fontSize;
+            ;
+            // this.text_w = (((font.getStringWidth(this.text_value)) / 1000)
+            // + ((1000 - this.font.getSpaceWidth()) / 1000))
+            // * (float) (this.style.fontSize * correccion);
+            this.text_w = font.getStringWidth(this.text_value) / 1000f * this.style.fontSize;
             this.font_w = this.text_w / this.text_value.length();
+            this.interlineado = this.font_h * 0.1f;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,12 +107,9 @@ public class text extends ElementAbstract {
         String[] words = txt.split("\\s+"); // Divide el texto en palabras
         StringBuilder line = new StringBuilder();
         float lineWidth = 0;
-
+        float spaceWidth = this.font.getStringWidth(" ") / 1000f * this.style.fontSize;
         for (String word : words) {
-            if (word.startsWith("1516A")) {
-                System.out.println("asdasd");
-            }
-            float wordWidth = this.font.getStringWidth(word) / 1000 * this.style.fontSize;
+            float wordWidth = this.font.getStringWidth(word) / 1000f * this.style.fontSize;
 
             if (wordWidth > width) {
                 String[] arr = word.split("(?<=\\G.{" + (int) (width / (wordWidth / (word.length() - 1))) + "})");
@@ -132,7 +134,7 @@ public class text extends ElementAbstract {
 
             // Agrega la palabra a la línea y actualiza el ancho de la línea
             line.append(word).append(" ");
-            lineWidth += wordWidth;
+            lineWidth += wordWidth + spaceWidth;
         }
 
         // Agrega la última línea si no está vacía
@@ -169,7 +171,7 @@ public class text extends ElementAbstract {
         if (this.style.height > 0) {
             return;
         }
-        this.style.height = ((this.font_h + 4) * (this.lines.length)) + this.style.paddingBottom
+        this.style.height = (float) ((this.font_h) * (this.lines.length)) + this.style.paddingBottom
                 + this.style.paddingTop + this.style.marginBottom + this.style.marginTop;
     }
 
@@ -197,8 +199,10 @@ public class text extends ElementAbstract {
         }
 
         if (hay_cambios) {
-            this.text_w = (((font.getStringWidth(text2)) / 1000) + ((1000 - this.font.getSpaceWidth()) / 1000))
-                    * (float) (this.style.fontSize * 1);
+            // this.text_w = (((font.getStringWidth(text2)) / 1000) + ((1000 -
+            // this.font.getSpaceWidth()) / 1000))
+            // * (float) (this.style.fontSize * 1);
+            this.text_w = font.getStringWidth(this.text_value) / 1000f * this.style.fontSize;
             if (this.lines.length > 1) {
                 this.lines = this.getLines(text2, this.style.getContentWidth());
             } else {
@@ -229,16 +233,78 @@ public class text extends ElementAbstract {
                 continue;
             if (line.length() <= 0)
                 continue;
+            // props.stream.beginText();
+            // props.stream.setFont(this.font, this.style.fontSize);
+            // props.stream.setNonStrokingColor(Color.decode(this.style.color));
+            // props.stream.newLineAtOffset(x + this.style.marginRight +
+            // this.style.paddingRight, y);
+            // props.stream.showText(line.trim());
+            // props.stream.endText();
+            float contentWidth = this.style.getContentWidth();
+            float fontSize = this.style.fontSize;
+
+            float textWidth = this.font.getStringWidth(line.trim()) / 1000 * fontSize;
+            float offsetX = x + this.style.marginRight + this.style.paddingRight;
+
+            switch (this.style.textAlign) {
+                case "center":
+                    offsetX += (contentWidth - textWidth) / 2;
+                    break;
+                case "right":
+                    offsetX += (contentWidth - textWidth);
+                    break;
+                case "justify":
+                    if (!line.equals(lines[lines.length - 1]) && line.trim().contains(" ")) {
+                        writeJustifiedLine(props.stream, line.trim(), offsetX, y, contentWidth, this.font, fontSize);
+                        y -= this.font_h * 1.5;
+                        continue;
+                    }
+                    break; // última línea o sin espacios: usa 'left'
+            }
+
             props.stream.beginText();
-            props.stream.setFont(this.font, this.style.fontSize);
+            props.stream.setFont(this.font, fontSize);
             props.stream.setNonStrokingColor(Color.decode(this.style.color));
-            props.stream.newLineAtOffset(x + this.style.marginRight + this.style.paddingRight, y);
+            props.stream.newLineAtOffset(offsetX, y);
             props.stream.showText(line.trim());
             props.stream.endText();
-            y -= this.font_h + 4;
+            y -= this.font_h;
         }
 
         return true;
+    }
+
+    private void writeJustifiedLine(PDPageContentStream stream, String line,
+            float x, float y, float width,
+            PDType0Font font, float fontSize) throws IOException {
+        String[] words = line.split("\\s+");
+        if (words.length < 2) {
+            stream.beginText();
+            stream.setFont(font, fontSize);
+            stream.setNonStrokingColor(Color.BLACK);
+            stream.newLineAtOffset(x, y);
+            stream.showText(line);
+            stream.endText();
+            return;
+        }
+
+        float totalWordsWidth = 0;
+        for (String word : words) {
+            totalWordsWidth += font.getStringWidth(word) / 1000 * fontSize;
+        }
+
+        float totalSpacing = width - totalWordsWidth;
+        float spaceWidth = totalSpacing / (words.length - 1);
+
+        float cursorX = x;
+        for (String word : words) {
+            stream.beginText();
+            stream.setFont(font, fontSize);
+            stream.newLineAtOffset(cursorX, y);
+            stream.showText(word);
+            stream.endText();
+            cursorX += font.getStringWidth(word) / 1000 * fontSize + spaceWidth;
+        }
     }
 
 }
